@@ -6,12 +6,14 @@ which lives in modules/.
 
 import re
 from bs4 import BeautifulSoup
+import warnings
 
 from utils import normalize_url
 
 EMAIL_REGEX = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 COMMENT_REGEX = re.compile(r"<!--(.*?)-->", re.DOTALL)
 
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 def extract_links(base_url: str, html: str):
     """Return absolute URLs found in <a href>, <link href>, and <area href>."""
