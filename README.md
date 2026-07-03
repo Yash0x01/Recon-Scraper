@@ -15,13 +15,13 @@ playwright install chromium
 ## Usage
 
 ```bash
-python main.py -u https://example.com
+python recon-scraper.py -u https://example.com
 ```
 
 Common options:
 
 ```bash
-python main.py -u https://example.com \
+python recon-scraper.py -u https://example.com \
   --depth 3 \                # max crawl depth (default 3)
   --max-pages 300 \          # cap on pages visited (default 300)
   --concurrency 10 \         # concurrent requests (default 10)
@@ -34,7 +34,7 @@ python main.py -u https://example.com \
   -y                         # skip the interactive authorization prompt
 ```
 
-Full flag list: `python main.py --help`
+Full flag list: `python recon-scraper.py --help`
 
 ## Output
 
@@ -54,7 +54,7 @@ Reports land in `reports/` as timestamped `.json` and `.html` files. The HTML re
 
 ```text
 recon-scraper/
-├── main.py          # CLI entry point
+├── recon-scraper.py          # CLI entry point
 ├── crawler.py        # async crawler (scope, robots.txt, concurrency, rate limiting)
 ├── extractor.py       # HTML parsing: links, JS srcs, forms, emails, comments
 ├── analyzer.py        # orchestrates extraction + modules into one findings set
