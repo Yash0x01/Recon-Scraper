@@ -1,5 +1,8 @@
 """
 Turns an Analysis object into JSON and a self-contained HTML dashboard.
+All file writes use explicit UTF-8 encoding — Windows defaults to the
+system codepage (often cp1252) otherwise, which breaks on any non-Latin
+characters pulled from crawled pages.
 """
 
 import json
@@ -19,7 +22,7 @@ def write_json_report(analysis, target: str, out_dir: str = "reports") -> str:
         "findings": analysis.to_dict(),
     }
 
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
 
     return path
@@ -180,7 +183,7 @@ def write_html_report(analysis, target: str, out_dir: str = "reports") -> str:
 </body>
 </html>"""
 
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(html)
 
     return path
