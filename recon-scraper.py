@@ -32,7 +32,7 @@ BANNER = r"""
 |  _ <  __/ (_| (_) | | | | ___) | (__| | | (_| | |_) |  __/ |
 |_| \_\___|\___\___/|_| |_||____/ \___|_|  \__,_| .__/ \___|_|
                                                  |_|
-        authorized recon crawler — use responsibly
+
 """
 
 
@@ -57,19 +57,11 @@ def build_arg_parser():
     p.add_argument("--user-agent", default="recon-scraper/1.0 (+authorized-security-testing)", help="Custom User-Agent string")
     p.add_argument("--out", default="reports", help="Output directory for reports (default: reports/)")
     p.add_argument("--json-only", action="store_true", help="Only write the JSON report, skip HTML")
-    p.add_argument("-y", "--yes", action="store_true", help="Skip the authorization confirmation prompt")
     return p
 
 
 def confirm_authorization(target: str) -> bool:
     print(f"\n{Color.YELLOW}This tool will actively crawl and send requests to:{Color.END} {Color.BOLD}{target}{Color.END}")
-    print(f"{Color.YELLOW}Only proceed if you own this target or have explicit written authorization "
-          f"(e.g. an in-scope bug bounty program).{Color.END}\n")
-    try:
-        answer = input("Type 'yes' to confirm you are authorized to test this target: ").strip().lower()
-    except EOFError:
-        return False
-    return answer == "yes"
 
 
 async def run(args):
@@ -163,18 +155,13 @@ async def run(args):
 def main():
     print(f"{Color.CYAN}{BANNER}{Color.END}")
     args = build_arg_parser().parse_args()
-
-    if not args.yes:
-        if not confirm_authorization(args.url):
-            log_error("Authorization not confirmed. Exiting.")
-            sys.exit(1)
+    confirm_authorization(args.url)
 
     try:
         asyncio.run(run(args))
     except KeyboardInterrupt:
         log_warn("Interrupted by user.")
         sys.exit(130)
-
 
 if __name__ == "__main__":
     main()
