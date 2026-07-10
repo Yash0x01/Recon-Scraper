@@ -6,10 +6,6 @@ Usage:
     python main.py -u https://example.com
     python main.py -u https://example.com --depth 2 --max-pages 200 --check-files
     python main.py -u https://example.com --include-subdomains --no-robots --delay 0.5
-
-IMPORTANT: Only run this against targets you own or are explicitly authorized
-to test (e.g. an in-scope bug bounty program). Respect program scope rules,
-rate limits, and robots.txt unless your authorization explicitly says otherwise.
 """
 
 import argparse
@@ -162,6 +158,7 @@ def main():
     except KeyboardInterrupt:
         log_warn("Interrupted by user.")
         sys.exit(130)
+
 
 if __name__ == "__main__":
     main()

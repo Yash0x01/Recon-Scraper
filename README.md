@@ -1,8 +1,7 @@
-# Recon-Scraper
+# recon-scraper
 
 An authorized-recon web crawler for bug bounty / security engineering work. Crawls a target, extracts assets (links, JS files, forms, params, emails), scans for likely secrets and interesting API endpoints, optionally probes a small set of well-known sensitive paths, and produces a JSON + HTML report.
 
-> **Only run this against targets you own or are explicitly authorized to test** (e.g. an in-scope bug bounty program). The tool prompts for a manual authorization confirmation before it runs unless you pass `-y`.
 
 ## Install
 
